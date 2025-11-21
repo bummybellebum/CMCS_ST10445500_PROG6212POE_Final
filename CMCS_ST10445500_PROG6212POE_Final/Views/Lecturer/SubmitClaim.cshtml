@@ -1,0 +1,47 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Submit Claim";
+    var rate = ViewBag.HourlyRate ?? 0;
+}
+
+<h2>Submit Hours Claim</h2>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Your hourly rate: <strong>R @rate</strong> (set by HR)</p>
+
+        <form asp-action="SubmitClaim" method="post">
+            <div class="mb-3">
+                <label>Hours Worked</label>
+                <input type="number" step="0.5" id="hours" name="hoursWorked" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label>Total Amount (R)</label>
+                <input type="text" id="total" class="form-control" readonly />
+            </div>
+            <div class="mb-3">
+                <label>Additional Notes</label>
+                <textarea name="notes" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Claim</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const rate = @rate;
+            $('#hours').on('input', function () {
+                const hours = parseFloat($(this).val()) || 0;
+                if (hours <= 0) {
+                    $('#total').val('Invalid hours');
+                    $('button[type=submit]').prop('disabled', true);
+                } else {
+                    $('#total').val((hours * rate).toFixed(2));
+                    $('button[type=submit]').prop('disabled', false);
+                }
+            });
+        });
+    </script>
+}
