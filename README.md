@@ -43,15 +43,6 @@ Run the app → navigate to:
 ### Live Demonstration Video
 Link: //
 
-### Lecturer Feedback & Implementation
-| Feedback                            | How It Was Implemented                                 |
-|-------------------------------------|----------------------------------------------------------------|
-| Use sessions only (no Identity)     | Custom session-based auth in `AccountController` + `BaseController` |
-| HR must set hourly rate             | Only visible in HR CreateUser form                             |
-| Separate views per role             | Dedicated controllers + views for each role                    |
-| Swagger must be enabled             | Swashbuckle added + accessible at /swagger                     |
-| Generate reports/PDF                | QuestPDF used in HR → DownloadReportPdf                        |
-
 ### Setup Instructions
 1. Open in Visual Studio 2022+
 2. Run → database auto-creates via migrations
